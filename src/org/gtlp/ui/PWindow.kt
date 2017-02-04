@@ -45,6 +45,13 @@ abstract class PWindow : PApplet() {
     }
 
     /**
+     * Method that is called prior to creating Processing's window.
+     * Set the size of your sketch here.
+     * Abstract to force an override on the developers side.
+     */
+    abstract override fun settings()
+
+    /**
      * Handles the drawing of [IView]s
      *
      * Remember to call `super.draw()` at the end of your [draw] method.
