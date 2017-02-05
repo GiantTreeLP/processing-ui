@@ -34,7 +34,7 @@ abstract class AbstractButton<out T>(parent: PWindow) : AbstractView<T>(parent),
             }
 
             override fun keyDown(event: KeyEvent) {
-                if (event.key == acceleratorKey) {
+                if (event.key == acceleratorKey && parent.hitView(this@AbstractButton)) {
                     pressed = true
                 }
             }
