@@ -4,6 +4,7 @@ import org.gtlp.ui.events.*
 import org.gtlp.ui.handlers.IMouseEventHandler
 import org.gtlp.ui.handlers.ViewHandler
 import org.gtlp.ui.views.IView
+import org.gtlp.ui.views.buttons.AbstractButton
 import org.gtlp.util.math.Vector
 import processing.core.PApplet
 
@@ -11,10 +12,41 @@ import processing.core.PApplet
  * Class to hold a more advanced window with support for [IView]s and [IMouseEventHandler]
  * Uses [ViewHandler] for exactly those features
  */
-abstract class PWindow : PApplet() {
+abstract class PWindow : PApplet(), IView {
 
     @Suppress("LeakingThis")
     private val viewHandler = ViewHandler(this)
+
+    override val listeners = mutableListOf<IEventListener>()
+
+    @Suppress("LeakingThis")
+    override val parent = this
+
+    override var pos = Vector.NAN
+
+    override var size = Vector.NAN
+
+    override fun drawHover() {
+        draw()
+    }
+
+    override fun handleEvent(event: IWindowEvent) {
+        when (event) {
+            is MouseEvent -> when (event.mouseEventType) {
+                MouseEventType.MOUSE_DOWN -> listeners.forEach { listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseDown(event) } }
+                MouseEventType.MOUSE_UP -> listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseUp(event) }
+                MouseEventType.MOUSE_CLICKED -> listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseClicked(event) }
+                MouseEventType.NONE -> listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseMoved(event) }
+            }
+            is KeyEvent -> when (event.keyEventType) {
+                KeyEventType.KEY_TYPED -> listeners.forEach { if (!event.cancelled && it.active && it is KeyEventListener) it.keyTyped(event) }
+                KeyEventType.KEY_DOWN -> listeners.forEach { if (!event.cancelled && it.active && it is KeyEventListener) it.keyDown(event) }
+                KeyEventType.KEY_UP -> listeners.forEach { if (!event.cancelled && it.active && it is KeyEventListener) it.keyUp(event) }
+            }
+        }
+    }
+
+    override fun onUpdate() {}
 
     final override fun mousePressed(nativeEvent: processing.event.MouseEvent) {
         viewHandler.handleEvent(MouseEvent(Vector(mouseX, mouseY), MouseEventType.MOUSE_DOWN, MouseButton.forInt(mouseButton)))
@@ -50,6 +82,18 @@ abstract class PWindow : PApplet() {
      * Abstract to force an override on the developers side.
      */
     abstract override fun settings()
+
+    override fun setup() {
+        viewHandler.add(this)
+        listeners.add(object : MouseEventAdapter() {
+            override fun mouseUp(event: MouseEvent) {
+                viewHandler.views.filter { it is AbstractButton<*> }.forEach {
+                    it as AbstractButton<*>
+                    it.pressed = false
+                }
+            }
+        })
+    }
 
     /**
      * Handles the drawing of [IView]s
