@@ -3,6 +3,7 @@ package org.gtlp.ui.views.buttons
 import org.gtlp.ui.PWindow
 import org.gtlp.util.math.Vector
 import processing.core.PConstants.CENTER
+import java.awt.Color
 
 /**
  * Simple button with some text on it.
@@ -17,6 +18,26 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
     var text = ""
 
     /**
+     * Color of the inset
+     */
+    var insetColor: Color = Color.GRAY
+
+    /**
+     * Background color when not hovering.
+     */
+    var backgroundColor: Color = Color(200, 200, 200)
+
+    /**
+     * Background color when hovering.
+     */
+    var hoverColor: Color = Color(250, 250, 250)
+
+    /**
+     *
+     */
+    var textColor: Color = Color.BLACK
+
+    /**
      * The text that is shown when the user is hovering their mouse over this button.
      * Set to *null* to disable this text
      */
@@ -26,13 +47,13 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
         parent.apply {
             val pos = this@TextButton.pos
             val size = this@TextButton.size
-            fill(200)
+            fill(backgroundColor.rgb)
             rect(pos.x, pos.y, size.x, size.y)
             textAlign(CENTER, CENTER)
             if (pressed) {
                 drawInsets()
             }
-            fill(0)
+            fill(textColor.rgb)
             textSize(12f)
             text(text, pos.x, pos.y, size.x, size.y)
         }
@@ -43,7 +64,7 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
             val pos = this@TextButton.pos
             val size = this@TextButton.size
             strokeWeight(2.5f)
-            stroke(127f)
+            stroke(insetColor.rgb)
             line(pos.x + 2, pos.y + 2, pos.x + 2, pos.y + size.y - 2)
             line(pos.x + 2, pos.y + 2, pos.x + size.x - 2, pos.y + 2)
         }
@@ -53,13 +74,13 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
         parent.apply {
             val pos = this@TextButton.pos
             val size = this@TextButton.size
-            fill(250)
+            fill(hoverColor.rgb)
             rect(pos.x, pos.y, size.x, size.y)
             textAlign(CENTER, CENTER)
             if (pressed) {
                 drawInsets()
             }
-            fill(0)
+            fill(textColor.rgb)
             textSize(12f)
             text(hoverText ?: text, pos.x, pos.y, size.x, size.y)
         }
