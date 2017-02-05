@@ -13,12 +13,12 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
 
     /**
      * The text that is usually shown.
-     * Not null-able
+     * Not null-able.
      */
     var text = ""
 
     /**
-     * Color of the inset
+     * Color of the inset.
      */
     var insetColor: Color = Color.GRAY
 
@@ -33,7 +33,7 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
     var hoverColor: Color = Color(250, 250, 250)
 
     /**
-     *
+     * Text color
      */
     var textColor: Color = Color.BLACK
 
