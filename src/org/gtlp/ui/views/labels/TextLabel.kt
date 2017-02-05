@@ -31,12 +31,23 @@ class TextLabel(text: String = "", override val parent: PWindow, override var po
      * @param alpha alpha value
      *
      * @return this
+     *
+     * @see background
      */
     fun background(r: Int, g: Int, b: Int, alpha: Int = 255): TextLabel {
         colorBg = Color(r, g, b, alpha)
         return this
     }
 
+    /**
+     * Factory method to set the background color
+     *
+     * @param c the [Color] for the background of this label
+     *
+     * @return this
+     *
+     * @see background
+     */
     fun background(c: Color): TextLabel {
         colorBg = c
         return this
@@ -51,12 +62,23 @@ class TextLabel(text: String = "", override val parent: PWindow, override var po
      * @param alpha alpha value
      *
      * @return this
+     *
+     * @see color
      */
     fun color(r: Int, g: Int, b: Int, alpha: Int = 255): TextLabel {
         colorText = Color(r, g, b, alpha)
         return this
     }
 
+    /**
+     * Factory method to set the text color
+     *
+     * @param c the color for the text of this label
+     *
+     * @return this
+     *
+     * @see color
+     */
     fun color(c: Color): TextLabel {
         colorText = c
         return this
@@ -64,11 +86,13 @@ class TextLabel(text: String = "", override val parent: PWindow, override var po
 
     override fun draw() {
         parent.apply {
+            val pos = this@TextLabel.pos
+            val size = this@TextLabel.size
             noStroke()
-            fill(colorBg.red.toFloat(), colorBg.green.toFloat(), colorBg.blue.toFloat(), colorBg.alpha.toFloat())
+            fill(colorBg.rgb)
             rect(pos.x, pos.y, size.x, size.y)
-            fill(colorText.red.toFloat(), colorText.green.toFloat(), colorText.blue.toFloat(), colorText.alpha.toFloat())
-            parent.textSize(textSize)
+            fill(colorText.rgb)
+            textSize(textSize)
             textAlign(alignX, alignY)
             if (size == Vector.ZERO) {
                 text(text, pos.x, pos.y)

@@ -12,7 +12,7 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
 
     /**
      * The text that is usually shown.
-     * Not nullable
+     * Not null-able
      */
     var text = ""
 
@@ -24,20 +24,41 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
 
     override fun draw() {
         parent.apply {
+            val pos = this@TextButton.pos
+            val size = this@TextButton.size
             fill(200)
             rect(pos.x, pos.y, size.x, size.y)
             textAlign(CENTER, CENTER)
+            if (pressed) {
+                drawInsets()
+            }
             fill(0)
             textSize(12f)
             text(text, pos.x, pos.y, size.x, size.y)
         }
     }
 
+    private fun drawInsets() {
+        parent.apply {
+            val pos = this@TextButton.pos
+            val size = this@TextButton.size
+            strokeWeight(2.5f)
+            stroke(127f)
+            line(pos.x + 2, pos.y + 2, pos.x + 2, pos.y + size.y - 2)
+            line(pos.x + 2, pos.y + 2, pos.x + size.x - 2, pos.y + 2)
+        }
+    }
+
     override fun drawHover() {
         parent.apply {
+            val pos = this@TextButton.pos
+            val size = this@TextButton.size
             fill(250)
             rect(pos.x, pos.y, size.x, size.y)
             textAlign(CENTER, CENTER)
+            if (pressed) {
+                drawInsets()
+            }
             fill(0)
             textSize(12f)
             text(hoverText ?: text, pos.x, pos.y, size.x, size.y)
