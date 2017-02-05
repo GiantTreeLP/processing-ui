@@ -31,7 +31,7 @@ class ViewHandler(val parent: PWindow) {
      */
     fun drawViews() {
         parent.apply {
-            views.forEach {
+            views.filter { it !is PWindow }.forEach {
                 if (hitView(it)) {
                     pushMatrix()
                     pushStyle()

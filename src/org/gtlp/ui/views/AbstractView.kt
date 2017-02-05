@@ -2,7 +2,6 @@ package org.gtlp.ui.views
 
 import org.gtlp.ui.PWindow
 import org.gtlp.ui.events.*
-import org.gtlp.util.math.Vector
 
 /**
  * Abstract view to be extended by proper implementations
@@ -25,7 +24,7 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @return this
      */
     fun size(width: Number, height: Number): T {
-        size = Vector(width, height)
+        size.set(width, height)
 
         //Cast is safe
         @Suppress("UNCHECKED_CAST")
@@ -41,7 +40,7 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @return this
      */
     fun pos(x: Number, y: Number): T {
-        pos = Vector(x, y)
+        pos.set(x, y)
 
         //Cast is safe
         @Suppress("UNCHECKED_CAST")
