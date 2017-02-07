@@ -1,6 +1,7 @@
 package org.gtlp.ui.views.buttons
 
 import org.gtlp.ui.PWindow
+import org.gtlp.ui.rect
 import org.gtlp.util.math.Vector
 import processing.core.PConstants.CENTER
 import java.awt.Color
@@ -47,8 +48,7 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
         parent.apply {
             val pos = this@TextButton.pos
             val size = this@TextButton.size
-            fill(backgroundColor.rgb)
-            rect(pos.x, pos.y, size.x, size.y)
+            rect(backgroundColor, pos, size)
             textAlign(CENTER, CENTER)
             if (pressed) {
                 drawInsets()
@@ -74,8 +74,7 @@ class TextButton(override val parent: PWindow, override var pos: Vector, overrid
         parent.apply {
             val pos = this@TextButton.pos
             val size = this@TextButton.size
-            fill(hoverColor.rgb)
-            rect(pos.x, pos.y, size.x, size.y)
+            rect(hoverColor, pos, size)
             textAlign(CENTER, CENTER)
             if (pressed) {
                 drawInsets()

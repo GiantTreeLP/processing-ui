@@ -1,6 +1,7 @@
 package org.gtlp.ui.views.labels
 
 import org.gtlp.ui.PWindow
+import org.gtlp.ui.rect
 import org.gtlp.util.math.Vector
 import processing.core.PApplet
 import java.awt.Color
@@ -89,8 +90,7 @@ class TextLabel(text: String = "", override val parent: PWindow, override var po
             val pos = this@TextLabel.pos
             val size = this@TextLabel.size
             noStroke()
-            fill(colorBg.rgb)
-            rect(pos.x, pos.y, size.x, size.y)
+            rect(colorBg, pos, size)
             fill(colorText.rgb)
             textSize(textSize)
             textAlign(alignX, alignY)
