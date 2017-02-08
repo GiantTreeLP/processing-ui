@@ -1,8 +1,8 @@
 package org.gtlp.ui.views
 
 import org.gtlp.ui.PWindow
-import org.gtlp.ui.events.IEventListener
 import org.gtlp.ui.events.IWindowEvent
+import org.gtlp.ui.listeners.IEventListener
 import org.gtlp.util.math.Vector
 
 /**

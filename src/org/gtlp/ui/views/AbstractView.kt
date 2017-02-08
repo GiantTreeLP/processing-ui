@@ -2,6 +2,9 @@ package org.gtlp.ui.views
 
 import org.gtlp.ui.PWindow
 import org.gtlp.ui.events.*
+import org.gtlp.ui.listeners.IEventListener
+import org.gtlp.ui.listeners.KeyEventListener
+import org.gtlp.ui.listeners.MouseEventListener
 
 /**
  * Abstract view to be extended by proper implementations
@@ -56,6 +59,7 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      */
     fun addEventListener(listener: IEventListener) {
         listeners.add(listener)
+        listeners.sortByDescending { it.priority }
     }
 
     /**

@@ -1,6 +1,7 @@
-package org.gtlp.ui.events
+package org.gtlp.ui.listeners
 
 import org.gtlp.ui.PWindow
+import org.gtlp.ui.events.KeyEvent
 import org.gtlp.ui.handlers.ViewHandler
 
 /**
@@ -9,6 +10,8 @@ import org.gtlp.ui.handlers.ViewHandler
  * Events are called by a [PWindow]'s [ViewHandler]
  */
 abstract class KeyEventListener : IEventListener {
+
+    override var priority = Priority.NORMAL
 
     override var active = true
 

@@ -3,6 +3,10 @@ package org.gtlp.ui
 import org.gtlp.ui.events.*
 import org.gtlp.ui.handlers.IMouseEventHandler
 import org.gtlp.ui.handlers.ViewHandler
+import org.gtlp.ui.listeners.IEventListener
+import org.gtlp.ui.listeners.KeyEventListener
+import org.gtlp.ui.listeners.MouseEventAdapter
+import org.gtlp.ui.listeners.MouseEventListener
 import org.gtlp.ui.views.IView
 import org.gtlp.ui.views.buttons.AbstractButton
 import org.gtlp.util.math.Vector
@@ -17,6 +21,9 @@ abstract class PWindow : PApplet(), IView {
     @Suppress("LeakingThis")
     private val viewHandler = ViewHandler(this)
 
+    override var visible = true
+
+    override var tag: Any? = null
     override val listeners = mutableListOf<IEventListener>()
 
     @Suppress("LeakingThis")
