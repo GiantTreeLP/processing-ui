@@ -15,6 +15,10 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      */
     override val listeners = mutableListOf<IEventListener>()
 
+    override var tag: Any? = null
+
+    override var visible = true
+
     /**
      * Factory method to set the size
      *
@@ -70,19 +74,21 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
     }
 
     override fun handleEvent(event: IWindowEvent) {
-        if (event is MouseEvent && parent.hitView(this)) {
-            when (event.mouseEventType) {
-                MouseEventType.MOUSE_DOWN -> onMouseDown(event)
-                MouseEventType.MOUSE_UP -> onMouseUp(event)
-                MouseEventType.MOUSE_CLICKED -> onMouseClicked(event)
-                MouseEventType.NONE -> onMouseHover(event)
+        if (visible) {
+            if (event is MouseEvent && parent.hitView(this)) {
+                when (event.mouseEventType) {
+                    MouseEventType.MOUSE_DOWN -> onMouseDown(event)
+                    MouseEventType.MOUSE_UP -> onMouseUp(event)
+                    MouseEventType.MOUSE_CLICKED -> onMouseClicked(event)
+                    MouseEventType.NONE -> onMouseHover(event)
+                }
             }
-        }
-        if (event is KeyEvent) {
-            when (event.keyEventType) {
-                KeyEventType.KEY_TYPED -> onKeyTyped(event)
-                KeyEventType.KEY_DOWN -> onKeyDown(event)
-                KeyEventType.KEY_UP -> onKeyUp(event)
+            if (event is KeyEvent) {
+                when (event.keyEventType) {
+                    KeyEventType.KEY_TYPED -> onKeyTyped(event)
+                    KeyEventType.KEY_DOWN -> onKeyDown(event)
+                    KeyEventType.KEY_UP -> onKeyUp(event)
+                }
             }
         }
     }
@@ -95,7 +101,14 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onMouseHover(event: MouseEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseMoved(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is MouseEventListener) {
+                it.mouseMoved(event)
+            }
+        }
     }
 
     /**
@@ -106,7 +119,14 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onMouseClicked(event: MouseEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseClicked(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is MouseEventListener) {
+                it.mouseClicked(event)
+            }
+        }
     }
 
     /**
@@ -117,7 +137,14 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onMouseDown(event: MouseEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseDown(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is MouseEventListener) {
+                it.mouseDown(event)
+            }
+        }
     }
 
     /**
@@ -128,7 +155,14 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onMouseUp(event: MouseEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is MouseEventListener) it.mouseUp(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is MouseEventListener) {
+                it.mouseUp(event)
+            }
+        }
     }
 
     /**
@@ -139,7 +173,14 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onKeyTyped(event: KeyEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is KeyEventListener) it.keyTyped(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is KeyEventListener) {
+                it.keyTyped(event)
+            }
+        }
     }
 
     /**
@@ -150,7 +191,14 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onKeyDown(event: KeyEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is KeyEventListener) it.keyDown(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is KeyEventListener) {
+                it.keyDown(event)
+            }
+        }
     }
 
     /**
@@ -161,6 +209,13 @@ abstract class AbstractView<out T>(override val parent: PWindow) : IView {
      * @param event the event that is passed to the listeners.
      */
     fun onKeyUp(event: KeyEvent) {
-        listeners.forEach { if (!event.cancelled && it.active && it is KeyEventListener) it.keyUp(event) }
+        listeners.filter { it.active }.forEach {
+            if (event.cancelled) {
+                return
+            }
+            if (it is KeyEventListener) {
+                it.keyUp(event)
+            }
+        }
     }
 }
