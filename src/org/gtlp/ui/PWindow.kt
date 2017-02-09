@@ -112,9 +112,10 @@ abstract class PWindow : PApplet(), IView {
      * @see onDraw
      */
     override fun draw() {
-        onDraw()
         viewHandler.handleEvent(MouseEvent(Vector.NAN, MouseEventType.NONE, MouseButton.NONE))
-        viewHandler.drawViews()
+        viewHandler.drawViews { it.pos.z < 0 }
+        onDraw()
+        viewHandler.drawViews { it.pos.z >= 0 }
     }
 
     /**

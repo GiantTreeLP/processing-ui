@@ -29,9 +29,9 @@ class ViewHandler(val parent: PWindow) {
      * Each view gets its own matrix and style environment.
      * Handles hovering as well.
      */
-    fun drawViews() {
+    inline fun drawViews(crossinline condition: (IView) -> Boolean) {
         parent.apply {
-            views.filter { it !is PWindow }.forEach {
+            views.filter { condition(it) && it !is PWindow }.forEach {
                 if (hitView(it)) {
                     pushMatrix()
                     pushStyle()
@@ -50,9 +50,10 @@ class ViewHandler(val parent: PWindow) {
     }
 
     /**
-     * Adds views to be handled
+     * Adds views to be handled and sort them by their position on the z-axis
      */
     fun add(view: IView) {
         views.add(view)
+        views.sortBy { it.pos.z }
     }
 }

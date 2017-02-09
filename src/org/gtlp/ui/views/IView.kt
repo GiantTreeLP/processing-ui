@@ -17,7 +17,7 @@ interface IView {
     val parent: PWindow
 
     /**
-     * The position
+     * The position, z-axis used for sorting drawing order
      */
     var pos: Vector
 
