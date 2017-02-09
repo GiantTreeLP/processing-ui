@@ -48,10 +48,12 @@ class Pane(override val parent: PWindow, override var pos: Vector, override var 
     }
 
     override fun draw() {
+        parent.noStroke()
         parent.rect(color, pos, size)
     }
 
     override fun drawHover() {
+        parent.noStroke()
         parent.rect(hoverColor, pos, size)
     }
 }
