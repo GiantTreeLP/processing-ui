@@ -139,6 +139,19 @@ abstract class PWindow : PApplet(), IView {
     }
 
     /**
+     * Removes an [IView] form this window's [viewHandler]
+     *
+     * @param view the [IView] that should be removed
+     *
+     * @return whether or not the [view] was actually removed (ie. found in the list)
+     *
+     * @see MutableList.remove
+     */
+    fun remove(view: IView): Boolean {
+        return viewHandler.remove(view)
+    }
+
+    /**
      * Method to easily determine whether the mouse hit the [IView]
      *
      * @param view the view in question

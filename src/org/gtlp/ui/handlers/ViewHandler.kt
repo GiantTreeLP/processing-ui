@@ -50,10 +50,18 @@ class ViewHandler(val parent: PWindow) {
     }
 
     /**
-     * Adds views to be handled and sort them by their position on the z-axis
+     * Adds views to be handled and sort them by their position on the z-axis.
      */
     fun add(view: IView) {
         views.add(view)
         views.sortBy { it.pos.z }
+    }
+
+    /**
+     * Removes views from this handler.
+     * No need to sort as removing something from a sorted set doesn't shuffle it.
+     */
+    fun remove(view: IView): Boolean {
+        return views.remove(view)
     }
 }
