@@ -25,12 +25,12 @@ class CustomShape(override val parent: PWindow, override var pos: Vector, overri
     /**
      * The color of the stroke
      */
-    var color = Color.WHITE
+    var color: Color = Color.WHITE
 
     /**
      * The fill color of the resulting shape
      */
-    var fillColor = Color.WHITE
+    var fillColor: Color = Color.WHITE
 
     /**
      * Whether or not to fill this shape
