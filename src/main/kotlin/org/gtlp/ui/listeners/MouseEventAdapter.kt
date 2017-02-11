@@ -6,7 +6,7 @@ import org.gtlp.ui.events.MouseEvent
  * Adapter for [MouseEventListener]
  * Fills all events from [MouseEventListener] with empty methods.
  */
-open class MouseEventAdapter(priority: Priority = Priority.NORMAL) : MouseEventListener() {
+open class MouseEventAdapter(override var priority: Priority = Priority.NORMAL) : MouseEventListener() {
     override fun mouseMoved(event: MouseEvent) {
     }
 
