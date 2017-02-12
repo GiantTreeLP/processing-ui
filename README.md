@@ -2,7 +2,6 @@
 A wrapper for Processing's PApplet to aid development with easy to use Views and UI elements.
 
 [![Build Status](https://travis-ci.org/GiantTreeLP/processing-ui.svg?branch=master)](https://travis-ci.org/GiantTreeLP/processing-ui)
-[![Build status](https://ci.appveyor.com/api/projects/status/29j811w9nm9h1aot?svg=true)](https://ci.appveyor.com/project/GiantTreeLP/processing-ui)
 
 It's very simple to use:
 =
