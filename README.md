@@ -3,6 +3,7 @@ A wrapper for Processing's PApplet to aid development with easy to use Views and
 
 [![Build Status](https://travis-ci.org/GiantTreeLP/processing-ui.svg?branch=master)](https://travis-ci.org/GiantTreeLP/processing-ui)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.gianttreelp/gtlp-processing-ui/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.gianttreelp/gtlp-processing-ui)
+[![Dependencies](https://app.updateimpact.com/badge/831936721338896384/processing-ui.svg?config=test)](https://app.updateimpact.com/latest/831936721338896384/processing-ui)
 
 It's very simple to use:
 =
