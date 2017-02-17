@@ -34,7 +34,7 @@ abstract class AbstractButton<out T>(parent: PWindow) : AbstractView<T>(parent),
         addEventListener(object : KeyEventAdapter() {
             override fun keyTyped(event: KeyEvent) {
                 if (event.key == acceleratorKey && parent.hitView(this@AbstractButton)) {
-                    onMouseClicked(MouseEvent(Vector.NAN, MouseEventType.MOUSE_CLICKED, MouseButton.LEFT))
+                    onMouseClicked(MouseEvent(Vector(parent.mouseX, parent.mouseY), MouseEventType.MOUSE_CLICKED, MouseButton.LEFT))
                 }
             }
 
