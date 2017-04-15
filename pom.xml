@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,14 +16,19 @@
     <licenses>
         <license>
             <name>GNU LESSER GENERAL PUBLIC LICENSE Version 3</name>
-            <url>https://github.com/GiantTreeLP/processing-ui/blob/master/LICENSE</url>
+            <url>
+                https://github.com/GiantTreeLP/processing-ui/blob/master/LICENSE
+            </url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:GiantTreeLP/processing-ui.git</developerConnection>
-        <connection>scm:git:git://github.com/GiantTreeLP/processing-ui.git</connection>
+        <developerConnection>
+            scm:git:git@github.com:GiantTreeLP/processing-ui.git
+        </developerConnection>
+        <connection>scm:git:git://github.com/GiantTreeLP/processing-ui.git
+        </connection>
         <url>https://github.com/GiantTreeLP/processing-ui/tree/master</url>
     </scm>
 
@@ -92,7 +98,8 @@
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+            </url>
         </repository>
     </distributionManagement>
 
@@ -243,7 +250,8 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <artifactId>junit-platform-surefire-provider
+                        </artifactId>
                         <version>1.0.0-M4</version>
                     </dependency>
                     <dependency>
@@ -266,7 +274,14 @@
                     <execution>
                         <phase>pre-site</phase>
                         <goals>
-                            <goal>dokka</goal>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>dokka-javadoc</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>javadocJar</goal>
                         </goals>
                     </execution>
                 </executions>
