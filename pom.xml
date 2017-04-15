@@ -5,7 +5,7 @@
 
     <groupId>com.github.gianttreelp</groupId>
     <artifactId>gtlp-processing-ui</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>processing-ui</name>
@@ -36,7 +36,9 @@
     </developers>
 
     <properties>
-        <kotlin.version>1.1.0</kotlin.version>
+        <kotlin.version>1.1.1</kotlin.version>
+        <dokka.version>0.9.13</dokka.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -48,11 +50,11 @@
         <dependency>
             <groupId>com.github.gianttreelp</groupId>
             <artifactId>gtlp-processing-utils</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
+            <artifactId>kotlin-stdlib-jre8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
@@ -64,7 +66,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.0.0-M3</version>
+            <version>5.0.0-M4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -74,6 +76,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <distributionManagement>
         <snapshotRepository>
@@ -87,6 +97,7 @@
     </distributionManagement>
 
     <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -102,7 +113,6 @@
                         <configuration>
                             <sourceDirs>
                                 <source>src/main/kotlin</source>
-                                <source>src/main/java</source>
                             </sourceDirs>
                         </configuration>
                     </execution>
@@ -112,6 +122,11 @@
                         <goals>
                             <goal>test-compile</goal>
                         </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <source>src/test/kotlin</source>
+                            </sourceDirs>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -128,7 +143,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>src/main/java</source>
+                                <source>src/main/kotlin</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -158,7 +173,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <source>src/main/java</source>
+                            <source>src/main/kotlin</source>
                         </configuration>
                     </execution>
                 </executions>
@@ -229,22 +244,43 @@
                     <dependency>
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>1.0.0-M3</version>
+                        <version>1.0.0-M4</version>
                     </dependency>
                     <dependency>
                         <groupId>org.junit.jupiter</groupId>
                         <artifactId>junit-jupiter-engine</artifactId>
-                        <version>5.0.0-M3</version>
+                        <version>5.0.0-M4</version>
                     </dependency>
                     <dependency>
                         <groupId>org.junit.vintage</groupId>
                         <artifactId>junit-vintage-engine</artifactId>
-                        <version>4.12.0-M3</version>
+                        <version>4.12.0-M4</version>
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka.version}</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceLinks>
+                        <link>
+                            <dir>${project.basedir}/src/main/kotlin</dir>
+                            <url>http://github.com/gianttreelp/processing-ui
+                            </url>
+                        </link>
+                    </sourceLinks>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 
 </project>
